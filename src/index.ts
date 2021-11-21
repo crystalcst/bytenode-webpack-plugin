@@ -29,6 +29,8 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
       debugLogs: false,
       keepSource: false,
       preventSourceMaps: true,
+      root: '',
+      rootExclude: '',
       silent: false,
       ...options,
     };
@@ -143,7 +145,9 @@ class BytenodeWebpackPlugin implements WebpackPluginInstance {
       const from = output.of(entryName);
       const to = output.of(name);
 
-      let relativeImportPath = toRelativeImportPath(options.output.path, from, to);
+      const { root, rootExclude } = this.options;
+
+      let relativeImportPath = toRelativeImportPath(options.output.path, from, to, root, rootExclude);
 
       // Use absolute path to load the compiled file in dev mode due to how electron-forge handles
       // the renderer process code loading (by using a server and not directly from the file system).

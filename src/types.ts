@@ -6,6 +6,8 @@ interface Options {
   keepSource: boolean;
   preventSourceMaps: boolean;
   silent: boolean;
+  root: string;
+  rootExclude: RegExp | string;
 }
 
 interface Prepared {
